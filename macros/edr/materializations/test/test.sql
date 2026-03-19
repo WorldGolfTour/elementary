@@ -248,7 +248,7 @@
     {% set full_view_name = view_schema ~ "." ~ view_name %}
 
     {# Create view from the compiled test SQL #}
-    {% do run_query("create view " ~ full_view_name ~ " as " ~ sql) %}
+    {% do elementary.run_query("create view " ~ full_view_name ~ " as " ~ sql) %}
 
     {% set query %}
         select {% if sample_limit is not none %} top {{ sample_limit }} {% endif %} *
@@ -258,7 +258,7 @@
     {% set result = elementary.agate_to_dicts(elementary.run_query(query)) %}
 
     {# Clean up the temp view #}
-    {% do run_query("drop view if exists " ~ full_view_name) %}
+    {% do elementary.run_query("drop view if exists " ~ full_view_name) %}
 
     {% do return(result) %}
 {% endmacro %}

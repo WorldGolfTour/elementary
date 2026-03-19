@@ -287,8 +287,8 @@
         identifier=model_relation.identifier ~ "__snap_tmp",
         type="table",
     ) %}
-    {% do run_query("drop table if exists " ~ tmp_snapshot) %}
-    {% do run_query(
+    {% do elementary.run_query("drop table if exists " ~ tmp_snapshot) %}
+    {% do elementary.run_query(
         elementary.get_columns_snapshot_query(
             model_relation, full_table_name, into_relation=tmp_snapshot
         )

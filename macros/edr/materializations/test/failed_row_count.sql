@@ -64,7 +64,7 @@
        We create a temp table from the test SQL, then select from it.
        The temp table is session-scoped and cleaned up by on_run_end. #}
     {% set tmp_relation = elementary.edr_make_temp_relation(model) %}
-    {% do run_query(
+    {% do elementary.run_query(
         "select * into " ~ tmp_relation ~ " from (" ~ sql ~ ") as __edr_inner"
     ) %}
     select

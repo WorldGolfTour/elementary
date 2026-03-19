@@ -60,7 +60,7 @@
             [table_node], existing_indexes
         ) %}
         {% if index_creation_query %}
-            {% do run_query(index_creation_query) %}
+            {% do elementary.run_query(index_creation_query) %}
         {% endif %}
     {% endfor %}
 {% endmacro %}

@@ -1,8 +1,8 @@
 {% macro generate_schema_baseline_test(name=none, include_sources=True, include_models=False, fail_on_added=False, enforce_types=False, convert_to_lower=False, resource_type=none) %}
   {% if name %}
-    {{ generate_schema_baseline_test_for_node(name, fail_on_added=fail_on_added, enforce_types=enforce_types, convert_to_lower=convert_to_lower, resource_type=resource_type) }}
+    {{ elementary.generate_schema_baseline_test_for_node(name, fail_on_added=fail_on_added, enforce_types=enforce_types, convert_to_lower=convert_to_lower, resource_type=resource_type) }}
   {% else %}
-    {{ generate_schema_baseline_test_for_all_nodes(include_sources=include_sources, include_models=include_models,
+    {{ elementary.generate_schema_baseline_test_for_all_nodes(include_sources=include_sources, include_models=include_models,
                                                    fail_on_added=fail_on_added, enforce_types=enforce_types, convert_to_lower=convert_to_lower) }}
   {% endif %}
 {% endmacro %}
@@ -14,7 +14,7 @@
           ((include_sources and node.resource_type == 'source') or
            (include_models and node.resource_type == 'model')) %}
       {% do print("Generating schema changes from baseline test for {} '{}':".format(node.resource_type, node.name)) %}
-      {{ generate_schema_baseline_test_for_node(node, fail_on_added=fail_on_added, enforce_types=enforce_types, convert_to_lower=convert_to_lower) }}
+      {{ elementary.generate_schema_baseline_test_for_node(node, fail_on_added=fail_on_added, enforce_types=enforce_types, convert_to_lower=convert_to_lower) }}
       {% do print('----------------------------------') %}
     {% endif %}
   {% endfor %}
@@ -35,7 +35,7 @@
     {% do return(none) %}
   {% endif %}
 
-  {% set node_relation = get_relation_from_node(node) %}
+  {% set node_relation = elementary.get_relation_from_node(node) %}
   {% if not node_relation %}
     {% do print("Table not found in the DB! Cannot create schema test.") %}
     {% do return(none) %}
@@ -54,9 +54,9 @@
   {# Full yaml for sources and models #}
   {% set full_yaml %}
   {%- if node.resource_type == 'source' %}
-    {{generate_schema_baseline_test_for_source(node, columns, test_params, convert_to_lower)}}
+    {{elementary.generate_schema_baseline_test_for_source(node, columns, test_params, convert_to_lower)}}
   {% else %}
-    {{generate_schema_baseline_test_for_model(node, columns, test_params, convert_to_lower)}}
+    {{elementary.generate_schema_baseline_test_for_model(node, columns, test_params, convert_to_lower)}}
   {% endif -%}
   {% endset %}
 

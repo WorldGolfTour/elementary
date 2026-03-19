@@ -28,7 +28,7 @@
 {% endmacro %}
 
 {% macro clickhouse__schema_exists(database, schema) %}
-    {% set result = run_query(
+    {% set result = elementary.run_query(
         "SELECT 1 FROM system.databases WHERE name = '" ~ schema ~ "' LIMIT 1"
     ) %}
     {% do return(result | length > 0) %}

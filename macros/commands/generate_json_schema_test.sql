@@ -8,7 +8,7 @@
       {% do exceptions.raise_compiler_error("Only sources and models are supported for this macro, supplied node type: '{}'".format(node.resource_type)) %}
     {% endif %}
 
-    {% set node_relation = get_relation_from_node(node) %}
+    {% set node_relation = elementary.get_relation_from_node(node) %}
     {% if not elementary.column_exists_in_relation(node_relation, column_name) %}
       {% do exceptions.raise_compiler_error("Column '{}' does not exist in {} '{}'!".format(column_name, node.resource_type, node_name)) %}
     {% endif %}
