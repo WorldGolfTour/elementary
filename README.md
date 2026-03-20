@@ -5,7 +5,8 @@ Fork of [elementary-data/elementary](https://github.com/elementary-data/elementa
 ## What's different from upstream
 
 - **Snowflake namespace fixes** — all unqualified macro calls patched with `elementary.` prefix so they resolve correctly under Snowflake's `EXECUTE DBT PROJECT` runtime.
-- **Slack alert hook** (`macros/org/send_slack_alert.sql`) — an `on-run-end` hook that calls a Snowflake stored procedure to post test-failure summaries to Slack. Opt-in via vars.
+- **Slack alert hook** (`macros/wgt/send_slack_alert.sql`) — an `on-run-end` hook that calls a Snowflake stored procedure to post test-failure summaries to Slack. Opt-in via vars.
+- **Nested deps for Snowflake** — `packages.yml` pins `dbt_utils` via `git` + `revision` (Hub `package:` entries fail Snowflake’s dbt compile validator).
 - **Trimmed CI/test scaffolding** — removed `.github/`, `integration_tests/`, and dev tooling to keep `dbt deps` clones fast.
 
 ## Usage
