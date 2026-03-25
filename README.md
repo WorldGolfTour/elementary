@@ -36,6 +36,12 @@ vars:
   elementary_slack_alert_procedure: "DB.SCHEMA.SEND_ELEMENTARY_SLACK_ALERT"
 ```
 
+Under `models:` add:
+```
+  elementary:
+    +schema: elementary
+```
+
 The hook runs automatically via `on-run-end`. When disabled (the default), it's a no-op.
 
 ## Updating from upstream
